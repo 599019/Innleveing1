@@ -11,20 +11,24 @@ public class oppgaveO1 {
 
         //Vinduet for lønn input, sjekker om input er gyldig tall.
         int lonn = 0;
-        String input = showInputDialog("Bruto lønn");
-        if (input == null){
-            System.exit(0);
-        } else {
-            try
-            {
-                lonn = parseInt(input);
-            }
-            catch (NumberFormatException e)
-            {
-                showMessageDialog(null, "Ugyldig input");
+        do {
+            String input = showInputDialog("Bruttolønn");
+            boolean ugyldig = false;
+
+            if (input == null){
                 System.exit(0);
             }
-        }
+            try {
+                lonn = parseInt(input);
+            }
+            catch (NumberFormatException e) {
+                showMessageDialog(null, "Ugyldig input");
+                ugyldig = true;
+            }
+            if (lonn < 1 && !ugyldig){
+                showMessageDialog(null, "Ugyldig antall");
+            }
+        } while (lonn < 1);
 
         //Valg om personen bor i Troms of Finnmark, brukes til å beregne riktig trinnskatt.
         int nord;
