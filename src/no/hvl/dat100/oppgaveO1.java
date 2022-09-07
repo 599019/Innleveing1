@@ -9,34 +9,21 @@ public class oppgaveO1 {
     public static void main(String[] args) {
 
 
-        //Vinduet for lønn input, sjekker om input er gyldig tall.
-        int lonn = 0;
+        //Vinduet for lønn input, sjekker at lønn er ikke mindre enn 1.
+        int lonn;
         do {
-            String input = showInputDialog("Bruttolønn");
-            boolean ugyldig = false;
-
-            if (input == null){
-                System.exit(0);
-            }
-            try {
-                lonn = parseInt(input);
-            }
-            catch (NumberFormatException e) {
-                showMessageDialog(null, "Ugyldig input");
-                ugyldig = true;
-            }
-            if (lonn < 1 && !ugyldig){
+            lonn = parseInt(showInputDialog("Bruttolønn"));
+            if (lonn < 1){
                 showMessageDialog(null, "Ugyldig antall");
             }
+
         } while (lonn < 1);
 
-        //Valg om personen bor i Troms of Finnmark, brukes til å beregne riktig trinnskatt.
-        int nord;
-        String[] valg = {"Ja", "Nei"};
 
-        nord = showInternalOptionDialog( null,"Bor du i Troms og Finnmark", "helløpo",
-                DEFAULT_OPTION, INFORMATION_MESSAGE, null, valg,valg[0]
-        );
+        //Ja og Nei valg om personen bor i Troms of Finnmark, brukes til å beregne riktig trinnskatt.
+        String[] valg = {"Ja", "Nei"};
+        int nord = showInternalOptionDialog( null,"Bor du i Troms og Finnmark", "helløpo",
+                 DEFAULT_OPTION, INFORMATION_MESSAGE, null, valg,valg[0]);
 
 
         //Start verdi for trinn 0,1,2,3,4,5
@@ -46,12 +33,15 @@ public class oppgaveO1 {
         double[] t = {0, 190350, 267900, 643800, 969200, 2000000};
         double[] p = {0, 0.017, 0.04, 0.134, 0.164, 0.174};
 
-        //Prosent verdi om personen bor i Troms og Finnmark
+
+        //Bytter prosent verdi på trinn 3 om personen bor i Troms og Finnmark
         String nordTxt = "Nei";
         if (nord == 0){
             p[3] = 0.114;
             nordTxt= "Ja";
+
         }
+
 
         //Sjekker om lønn verdi er mellom t1 og t2, om det stemmer regner ut ny trinn 1 verdi.
         if (lonn >= t[1] && lonn <= t[2]) {
@@ -75,22 +65,22 @@ public class oppgaveO1 {
                     } else {
                         trinn[4] = (t[5] - t[4]) * p[4];
                         trinn[5] = (lonn - t[5]) * p[5];
+
                     }
+
                 }
+
             }
+
         }
 
-        //Regnerut tottal trinnskat, og skriver det ut til bruker avrundet til nærmeste hel tall.
+
+        //Finner ut tottal trinnskat, og skriver det ut til bruker avrundet til nærmeste heltall.
         double trinnskatt = (trinn[1] + trinn[2] + trinn[3] + trinn[4] +trinn[5]);
         String utTxt =
-                "Lønn: "+lonn+"kr"+
-                        "\nTroms og Finnmark: " + nordTxt+
-                        "\nTrinnskatt: "+round(trinnskatt)+"kr"+
-                        "\n"+" \nTrinn 1: "+round(trinn[1])+"kr"+
-                        "\nTrinn 2: "+round(trinn[2])+"kr"+
-                        "\nTrinn 3: "+round(trinn[3])+"kr"+
-                        "\nTrinn 4: "+round(trinn[4])+"kr"+
-                        "\nTrinn 5: "+round(trinn[5]) + "kr";
+                "Lønn: "+lonn+"kr"+ "\nTroms og Finnmark: " + nordTxt+ "\nTrinnskatt: "+round(trinnskatt)+"kr"+
+                        "\n"+" \nTrinn 1: "+round(trinn[1])+"kr"+ "\nTrinn 2: "+round(trinn[2])+"kr"+ "\nTrinn 3: "+round(trinn[3])+"kr"+
+                        "\nTrinn 4: "+round(trinn[4])+"kr"+ "\nTrinn 5: "+round(trinn[5]) + "kr";
         showMessageDialog(null, utTxt);
 
     }

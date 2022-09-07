@@ -3,27 +3,15 @@ package no.hvl.dat100;
 import static javax.swing.JOptionPane.*;
 import static java.lang.Integer.*;
 
-
 public class oppgaveO3 {
 
     public static void main(String[] args){
 
-        double n = 0;
-        do {
-            String input = showInputDialog("Heltall");
-            boolean ugyldig = false;
 
-            if (input == null){
-                System.exit(0);
-            }
-            try {
-                n = parseInt(input);
-            }
-            catch (NumberFormatException e) {
-                showMessageDialog(null, "Ugyldig input");
-                ugyldig = true;
-            }
-            if (n < 1 && !ugyldig){
+        int n;
+        do {
+            n = parseInt(showInputDialog("Heltall"));
+            if (n < 1){
                 showMessageDialog(null, "Ugyldig antall");
             }
         } while (n < 1);
