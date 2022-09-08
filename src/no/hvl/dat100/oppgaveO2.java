@@ -7,7 +7,7 @@ public class oppgaveO2 {
 
     public static void main(String[] args) {
 
-        //Kjører loppen 10 ganger.
+        //Kjører loop 10 ganger.
         for (int elev = 1; elev < (11); elev++) {
 
             //Leser in poengum til elev nr.x.
