@@ -1,26 +1,20 @@
 package no.hvl.dat100;
 
-import static javax.swing.JOptionPane.*;
-import static java.lang.Integer.*;
+import static java.lang.Integer.parseInt;
+import static javax.swing.JOptionPane.showInputDialog;
 
 public class oppgaveO2 {
 
     public static void main(String[] args) {
 
-        //Leser inn poengsum 10 ganger
+        //Kjører loppen 10 ganger.
         for (int elev = 1; elev < (11); elev++) {
 
-            int poeng;
-            do {
-                poeng = parseInt(showInputDialog("Antall poeng av 100 til elev nr."+elev));
+            //Leser in poengum til elev nr.x.
+            int poeng = gyldigPoeng("Oppgi peongsum (0-100) til elev nr. " + elev);
 
-                if (poeng < 0 || poeng > 100){
-                    showMessageDialog(null, "Ugyldig antall");
-                }
 
-            } while (poeng < 0 || poeng > 100);
-
-            //Sjekker karakteren til eleven basert på peongsum
+            //Sjekker karakteren til elev x  basert på peongsum.
             String karakter;
             if (poeng < 40) {
                 karakter = "F";
@@ -36,11 +30,31 @@ public class oppgaveO2 {
                 karakter = "A";
             }
 
-            //Skriver ut elevnr, poeng og karakter om poengsum gyldig.
+            //Skriver ut elev x, poeng og karakter om poengsum gyldig.
             System.out.println("Elev nr." + elev + " fikk " + poeng + " poeng og får karakter " + karakter);
-
         }
-
     }
 
+    private static int gyldigPoeng(String ledetekst) {
+        int tall = -1;
+        boolean ok;
+        String feilmelding = "";
+        do {
+            String input = showInputDialog(feilmelding + ledetekst);
+            try
+            {
+                tall = parseInt(input);
+                ok = tall > 0 && tall <= 100;
+            }
+            catch (NumberFormatException e)
+            {
+                ok = false;
+            }
+            finally {
+                if (input == null) System.exit(0);
+            }
+            feilmelding = "Ulovlig verdi! ";
+        } while (!ok);
+        return tall;
+    }
 }
