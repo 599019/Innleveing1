@@ -11,10 +11,10 @@ public class oppgaveO2 {
         for (int elev = 1; elev < (11); elev++) {
 
             //Leser in poengum til elev nr.x.
-            int poeng = gyldigPoeng("Oppgi peongsum (0-100) til elev nr. " + elev);
+            int poeng = gyldigPoeng("Oppgi poengsum (0-100) til elev nr. " + elev);
 
 
-            //Sjekker karakteren til elev x  basert på peongsum.
+            //Sjekker karakteren til elev x  basert på poengsum.
             String karakter;
             if (poeng < 40) {
                 karakter = "F";
@@ -30,7 +30,7 @@ public class oppgaveO2 {
                 karakter = "A";
             }
 
-            //Skriver ut elev x, poeng og karakter om poengsum gyldig.
+            //Skriver ut elev x, poeng og karakter i terminalen om poengsum gyldig.
             System.out.println("Elev nr." + elev + " fikk " + poeng + " poeng og får karakter " + karakter);
         }
     }
